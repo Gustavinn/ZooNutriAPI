@@ -34,6 +34,9 @@ public class Biometry implements Serializable {
     @Column(name = "LENGTH")
     private String length;
 
+    @Column(name = "HEIGHT")
+    private String height;
+
     @Column(name = "NOTE")
     private String note;
 
