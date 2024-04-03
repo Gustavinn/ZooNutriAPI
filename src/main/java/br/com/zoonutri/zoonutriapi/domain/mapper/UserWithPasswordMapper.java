@@ -1,11 +1,9 @@
 package br.com.zoonutri.zoonutriapi.domain.mapper;
 
 import br.com.zoonutri.zoonutriapi.domain.User;
-import br.com.zoonutri.zoonutriapi.domain.dto.UserDTO;
+import br.com.zoonutri.zoonutriapi.domain.dto.UserWithPasswordDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = { TaskMapper.class, UserRoleMapper.class })
-public interface UserMapper extends AbstractMapper<User, UserDTO> {
-
+public interface UserWithPasswordMapper extends AbstractMapper<User, UserWithPasswordDTO> {
 }
-

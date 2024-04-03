@@ -30,8 +30,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
-    private final UserMapper userMapper;
-    private final UserWithPasswordMapper userWithPasswordMapper;
+    private UserMapper userMapper;
+    private UserWithPasswordMapper userWithPasswordMapper;
     private final LogService logService;
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -44,7 +44,7 @@ public class UserService {
     }
 
     public UserDTO findUserByEmailPassword(final String email, final String password) {
-        return userMapper.toDto(userRepository.findByEmailAndPassword(email, password)
+        return userMapper.mapToDto(userRepository.findByEmailAndPassword(email, password)
                 .orElseThrow(
                         () -> new IllegalArgumentException(getMessage(MSG_ERROR_AUTHENTICATION_01))));
     }
@@ -52,7 +52,7 @@ public class UserService {
     public void saveUser(final UserWithPasswordDTO userDTO) {
         veriyEmailAlreadyExists(userDTO);
         final String hashUser = generateHash();
-        final User user = userWithPasswordMapper.toEntity(userDTO);
+        final User user = userWithPasswordMapper.mapToEntity(userDTO);
 
         user.setUserRole(userRoleRepository.findById(userDTO.getUserRole().getId())
                 .orElseThrow(() -> new IllegalArgumentException(

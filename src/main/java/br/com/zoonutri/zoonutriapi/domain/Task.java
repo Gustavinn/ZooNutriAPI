@@ -1,9 +1,10 @@
 package br.com.zoonutri.zoonutriapi.domain;
 
 import br.com.zoonutri.zoonutriapi.domain.enums.TaskStatus;
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 

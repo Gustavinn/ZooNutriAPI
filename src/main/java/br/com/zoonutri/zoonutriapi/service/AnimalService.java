@@ -20,7 +20,7 @@ public class AnimalService {
     public static final String MSG_ERROR_ANIMAL_ID = "msg.error.animal.id";
 
     private final AnimalRepository animalRepository;
-    private final AnimalMapper animalMapper;
+    private AnimalMapper animalMapper;
     private final LogService logService;
 
     public Animal findById(final Integer animalId) {
@@ -34,7 +34,7 @@ public class AnimalService {
     }
 
     public void saveAnimal(final AnimalDTO animalDTO) {
-        final Animal animal = animalMapper.toEntity(animalDTO);
+        final Animal animal = animalMapper.mapToEntity(animalDTO);
 
         if (isNull(animal.getCreationDate())) {
             animal.setCreationDate(new Date());

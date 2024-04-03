@@ -20,7 +20,7 @@ public class TaskService {
     public static final String MSG_ERROR_TASK_ID = "msg.error.task.id";
 
     private final TaskRepository taskRepository;
-    private final TaskMapper taskMapper;
+    private TaskMapper taskMapper;
     private final LogService logService;
 
     public List<TaskDTO> findAllTasks() {
@@ -40,7 +40,7 @@ public class TaskService {
             taskDTO.setTaskStatus(UNCOMPLETED);
         }
 
-        taskRepository.save(taskMapper.toEntity(taskDTO));
+        taskRepository.save(taskMapper.mapToEntity(taskDTO));
 
         if (isUpdate) {
             logService.saveLog(logService.createLogDTO(TASK_ICON, "atualizou uma tarefa às"));

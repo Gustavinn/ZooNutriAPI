@@ -5,11 +5,11 @@ import br.com.zoonutri.zoonutriapi.domain.Biometry;
 import br.com.zoonutri.zoonutriapi.domain.dto.BiometryDTO;
 import br.com.zoonutri.zoonutriapi.domain.mapper.BiometryMapper;
 import br.com.zoonutri.zoonutriapi.repository.BiometryRepository;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +32,13 @@ public class BiometryService {
     public static final String MSG_ERROR_BIOMETRY_ID = "msg.error.biometry.id";
 
     private final BiometryRepository biometryRepository;
-    private final BiometryMapper biometryMapper;
+    private BiometryMapper biometryMapper;
     private ReportService reportService;
     private final AnimalService animalService;
     private LogService logService;
 
     public BiometryDTO findBiometryById(final Integer biometryId) {
-        return biometryMapper.toDto(
+        return biometryMapper.mapToDto(
                 biometryRepository.findById(biometryId)
                         .orElseThrow(() -> new IllegalArgumentException(
                                 getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId
@@ -54,7 +54,7 @@ public class BiometryService {
     }
 
     public void saveBiometry(final BiometryDTO biometryDTO, Boolean isUpdate) {
-        final Biometry biometry = biometryMapper.toEntity(biometryDTO);
+        final Biometry biometry = biometryMapper.mapToEntity(biometryDTO);
 
         if (isNull(biometry.getCreationDate())) {
             biometry.setCreationDate(new Date());

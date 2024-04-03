@@ -19,7 +19,7 @@ import static br.com.zoonutri.zoonutriapi.util.GeneralUtil.getLoggedUser;
 public class LogService {
 
     private final LogRepository logRepository;
-    private final LogMapper logMapper;
+    private LogMapper logMapper;
 
     public final static String TASK_ICON = "clipboard-text-outline";
     public final static String ANIMAL_ICON = "paw";
@@ -35,7 +35,7 @@ public class LogService {
     }
 
     public Log saveLog(LogDTO logDTO) {
-        Log log = logMapper.toEntity(logDTO);
+        Log log = logMapper.mapToEntity(logDTO);
         MyUserDetails loggedUser = getLoggedUser();
         log.setUser(User.builder().id(loggedUser.getUser().getId()).build());
         return logRepository.saveAndFlush(log);

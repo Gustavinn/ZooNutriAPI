@@ -9,5 +9,5 @@ import org.mapstruct.Mapping;
 public interface LogMapper extends AbstractMapper<Log, LogDTO> {
 
     @Mapping(source = "user.name", target = "userName")
-    LogDTO toDto(Log entity);
+    LogDTO mapToDto(Log entity);
 }

@@ -1,0 +1,60 @@
+package br.com.zoonutri.zoonutriapi.controller;
+
+import br.com.zoonutri.zoonutriapi.domain.dto.BiometryDTO;
+import br.com.zoonutri.zoonutriapi.service.BiometryService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
+import static org.springframework.http.HttpStatus.*;
+
+@RestController
+@RequestMapping("/biometry")
+@RequiredArgsConstructor
+public class BiometryController {
+
+    private final BiometryService biometryService;
+
+    @GetMapping(produces = "application/json")
+    public ResponseEntity<List<BiometryDTO>> findAllBiometrics() {
+        return ResponseEntity.ok(biometryService.findAllBiometrics());
+    }
+
+    @GetMapping(value = "/biometry/{biometryId}", produces = "application/json")
+    public ResponseEntity<BiometryDTO> findBiometryById(@PathVariable final Integer biometryId) {
+        return ResponseEntity.ok(biometryService.findBiometryById(biometryId));
+    }
+
+    @GetMapping(value = "/{animalId}", produces = "application/json")
+    public ResponseEntity<List<BiometryDTO>> findAnimalBiometrics(@PathVariable final Integer animalId) {
+        return ResponseEntity.ok(biometryService.findAnimalBiometrics(animalId));
+    }
+
+    @PostMapping(consumes = "application/json")
+    public ResponseEntity<BiometryDTO> saveBiometry(@RequestBody final BiometryDTO biometryDTO) {
+        biometryService.saveBiometry(biometryDTO, Boolean.FALSE);
+        return ResponseEntity.status(CREATED).build();
+    }
+
+    @PutMapping(consumes = "application/json")
+    public ResponseEntity<BiometryDTO> updateBiometry(@RequestBody final BiometryDTO biometryDTO) {
+        biometryService.saveBiometry(biometryDTO, Boolean.TRUE);
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/{biometryId}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<BiometryDTO> deleteBiometry(@PathVariable final Integer biometryId) {
+        biometryService.deleteBiometry(biometryId);
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    @GetMapping("/report/{biometryId}")
+    public void generatePdfReport(@PathVariable final Integer biometryId, final HttpServletResponse response) {
+        biometryService.generatePdfReport(biometryId, response);
+    }
+}
