@@ -12,9 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static br.com.zoonutri.zoonutriapi.security.MyUserDetailsService.MSG_ERROR_AUTHENTICATION_01;
 import static br.com.zoonutri.zoonutriapi.service.LogService.USER_ICON;
@@ -30,13 +32,18 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
-    private UserMapper userMapper;
-    private UserWithPasswordMapper userWithPasswordMapper;
+    private final UserMapper userMapper;
+    private final UserWithPasswordMapper userWithPasswordMapper;
     private final LogService logService;
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+
     public List<UserDTO> findUsers() {
-        return userMapper.toDtoList(userRepository.findAll());
+        return userRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(User::getName))
+                .map(userMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     public Optional<User> findByEmail(final String email) {

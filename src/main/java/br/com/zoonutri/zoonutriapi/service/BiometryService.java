@@ -32,10 +32,10 @@ public class BiometryService {
     public static final String MSG_ERROR_BIOMETRY_ID = "msg.error.biometry.id";
 
     private final BiometryRepository biometryRepository;
-    private BiometryMapper biometryMapper;
-    private ReportService reportService;
+    private final BiometryMapper biometryMapper;
+    private final ReportService reportService;
     private final AnimalService animalService;
-    private LogService logService;
+    private final LogService logService;
 
     public BiometryDTO findBiometryById(final Integer biometryId) {
         return biometryMapper.mapToDto(

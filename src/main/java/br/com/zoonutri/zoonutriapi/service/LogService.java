@@ -19,7 +19,7 @@ import static br.com.zoonutri.zoonutriapi.util.GeneralUtil.getLoggedUser;
 public class LogService {
 
     private final LogRepository logRepository;
-    private LogMapper logMapper;
+    private final LogMapper logMapper;
 
     public final static String TASK_ICON = "clipboard-text-outline";
     public final static String ANIMAL_ICON = "paw";

@@ -20,7 +20,7 @@ public class TaskService {
     public static final String MSG_ERROR_TASK_ID = "msg.error.task.id";
 
     private final TaskRepository taskRepository;
-    private TaskMapper taskMapper;
+    private final TaskMapper taskMapper;
     private final LogService logService;
 
     public List<TaskDTO> findAllTasks() {

@@ -24,7 +24,7 @@ public class AnimalDTO implements Serializable {
 
     private String note;
 
-    @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape = STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "America/Sao_Paulo")
     private Date creationDate;
 
     private List<TaskDTO> tasks;

@@ -25,17 +25,11 @@ import static br.com.zoonutri.zoonutriapi.util.GeneralUtil.getMessage;
 @RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private MyUserDetailsService userDetailsService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
+    private final MyUserDetailsService userDetailsService;
+    private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     @PostMapping(produces = "application/json")
     public ResponseEntity<AuthenticationResponseDTO> createAuthenticationToken(@RequestBody AuthenticationRequestDTO authenticationRequestDTO) throws Exception {

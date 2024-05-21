@@ -20,7 +20,7 @@ public class AnimalService {
     public static final String MSG_ERROR_ANIMAL_ID = "msg.error.animal.id";
 
     private final AnimalRepository animalRepository;
-    private AnimalMapper animalMapper;
+    private final AnimalMapper animalMapper;
     private final LogService logService;
 
     public Animal findById(final Integer animalId) {

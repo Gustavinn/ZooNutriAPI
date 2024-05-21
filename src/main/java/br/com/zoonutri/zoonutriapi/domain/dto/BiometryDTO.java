@@ -33,7 +33,7 @@ public class BiometryDTO implements Serializable {
 
     private String prescription;
 
-    @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape = STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "America/Sao_Paulo")
     private Date creationDate;
 
 }
