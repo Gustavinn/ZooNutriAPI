@@ -20,7 +20,7 @@ public class LogController {
     private final LogService logService;
 
     @GetMapping(produces = "application/json")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<List<LogDTO>> findUserTasks() {
         return ResponseEntity.ok(logService.findAllLogs());
     }

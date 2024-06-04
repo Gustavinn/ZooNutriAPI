@@ -37,7 +37,7 @@ public class AnimalController {
     }
 
     @DeleteMapping("/{animalId}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<AnimalDTO> deleteAnimal(@PathVariable final Integer animalId) {
         animalService.deleteAnimal(animalId);
         return ResponseEntity.status(NO_CONTENT).build();
