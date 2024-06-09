@@ -20,7 +20,7 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping(produces = "application/json")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<List<TaskDTO>> findAllTasks() {
         return ResponseEntity.ok(taskService.findAllTasks());
     }
@@ -36,21 +36,21 @@ public class TaskController {
     }
 
     @PostMapping(consumes = "application/json")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_DOCTOR')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_DOCTOR')")
     public ResponseEntity<TaskDTO> saveTask(@RequestBody final TaskDTO taskDTO) {
         taskService.saveTask(taskDTO, Boolean.FALSE);
         return ResponseEntity.status(CREATED).build();
     }
 
     @PutMapping(consumes = "application/json")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_DOCTOR')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_DOCTOR')")
     public ResponseEntity<TaskDTO> updateTask(@RequestBody final TaskDTO taskDTO) {
         taskService.saveTask(taskDTO, Boolean.TRUE);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @DeleteMapping("/{taskId}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<TaskDTO> deleteTask(@PathVariable final Integer taskId) {
         taskService.deleteTask(taskId);
         return ResponseEntity.status(NO_CONTENT).build();

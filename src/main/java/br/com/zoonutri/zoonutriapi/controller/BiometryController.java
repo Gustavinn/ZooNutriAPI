@@ -47,7 +47,7 @@ public class BiometryController {
     }
 
     @DeleteMapping("/{biometryId}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<BiometryDTO> deleteBiometry(@PathVariable final Integer biometryId) {
         biometryService.deleteBiometry(biometryId);
         return ResponseEntity.status(NO_CONTENT).build();

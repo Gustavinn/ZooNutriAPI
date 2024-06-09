@@ -32,14 +32,14 @@ public class UserController {
     }
 
     @PutMapping(consumes = "application/json")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<UserWithPasswordDTO> updateUser(@RequestBody final UserWithPasswordDTO userDTO) {
         userService.updateUser(userDTO);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @DeleteMapping("/{userId}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<UserDTO> deleteUser(@PathVariable final Integer userId) {
         userService.deleteUser(userId);
         return ResponseEntity.status(NO_CONTENT).build();
